@@ -1,0 +1,29 @@
+name: Build RPM and DEB
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install RPM build tools
+      run: sudo apt-get install -y rpm build-essential
+
+    - name: Install DEB build tools
+      run: sudo apt-get install -y dpkg-dev
+
+    - name: Install RPM package
+      run: sudo rpm -i count-files-1.0-1.noarch.rpm
+
+    - name: Install DEB package
+      run: sudo dpkg -i deb-package.deb
+
+    - name: Execute the script
+      run: /usr/local/bin/count_files.sh
