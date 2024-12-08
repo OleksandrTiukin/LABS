@@ -10,8 +10,13 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 
-COPY count-files-1.0-1.noarch.rpm /tmp/
-COPY deb-package.deb /tmp/
+COPY count-files-1.0-1.noarch.rpm /usr/local/bin/
+COPY deb-package.deb /usr/local/bin/
+
+COPY count_files.sh /usr/local/bin/count_files.sh
+
+
+RUN chmod +x /usr/local/bin/count_files.sh
 
 
 USER jenkins
